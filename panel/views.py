@@ -2,8 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView
 from django.core.mail import send_mail
-from .models import Post
-from .forms import EmailPostFormulario
+from .models import Post, Comentario
+from .forms import EmailPostFormulario, ComentarioFormulario
 
 def post_list(request):
     object_list=Post.publicado.all()
@@ -12,10 +12,8 @@ def post_list(request):
     try:
         posts = paginator.page(page)
     except PageNotAnInteger:
-        # If page is not an integer deliver the first page
         posts = paginator.page(1)
     except EmptyPage:
-        # If page is out of range deliver last page of results
         posts = paginator.page(paginator.num_pages)
     return render(request,
                   'panel/post/listar.html',
@@ -28,9 +26,24 @@ def post_detail(request, year, month, day, post):
                                    publicar__year=year,
                                    publicar__month=month,
                                    publicar__day=day)
+
+    comentarios = post.comentarios.filter(activo=True)
+    nuevo_comentario = None
+
+    if request.method == 'POST':
+        comentario_formulario = ComentarioFormulario(data=request.POST)
+        if comentario_formulario.is_valid():
+            nuevo_comentario = comentario_formulario.save(commit=False)
+            nuevo_comentario.post = post
+            nuevo_comentario.save()
+    else:
+        comentario_formulario = ComentarioFormulario()
     return render(request,
                   'panel/post/detalle.html',
-                  {'post':post})
+                  {'post': post,
+                  'comentarios': comentarios,
+                  'nuevo_comentario': nuevo_comentario,
+                  'comentario_formulario':comentario_formulario})
 
 class PostListView(ListView):
     queryset = Post.publicado.all()

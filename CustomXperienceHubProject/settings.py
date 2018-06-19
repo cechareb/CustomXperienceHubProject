@@ -120,19 +120,19 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-#EMAIL_USE_TLS = True
-EMAIL_HOST = 'pelma1w8pms04.nextelperu.net'
-#EMAIL_HOST = '172.20.1.104'
-#EMAIL_HOST = 'relay-procesos.entel.pe' --Consultar actualmente a donde va
-#EMAIL_HOST = '14.240.4.135'
-EMAIL_PORT = 25
-#EMAIL_HOST_USER = 'cesar.chahuas'
-#EMAIL_HOST_PASSWORD = 'P4tr0c1n141804'
+##EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+##EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+##EMAIL_USE_TLS = True
+#EMAIL_HOST = 'pelma1w8pms04.nextelperu.net'
+##EMAIL_HOST = '172.20.1.104'
+##EMAIL_HOST = 'relay-procesos.entel.pe' --Consultar actualmente a donde va
+##EMAIL_HOST = '14.240.4.135'
+#EMAIL_PORT = 25
+##EMAIL_HOST_USER = 'cesar.chahuas'
+##EMAIL_HOST_PASSWORD = 'P4tr0c1n141804'
 
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_HOST_USER = 'cesar.chahuasrebatta@gmail.com'
-# EMAIL_HOST_PASSWORD = 'p4tr0c1n14'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'cesar.chahuasrebatta@gmail.com'
+EMAIL_HOST_PASSWORD = 'p4tr0c1n14'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

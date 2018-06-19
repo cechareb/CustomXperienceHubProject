@@ -8,8 +8,36 @@ Publicado {{ post.publicar }} por {{ post.autor }}
 </p>
 {{ post.cuerpo|linebreaks }}
 <p>
-<a href="{% url 'panel:post_share' post.id %}">
-Compartir este Post
-</a>
+    <a href="{% url 'panel:post_share' post.id %}">
+    Compartir este Post
+    </a>
 </p>
+{% with comentarios.count as total_comentarios %}
+    <h2>
+    {{ total_comentarios }} Comentario{{ total_comentarios|pluralize }}
+    </h2>
+{% endwith %}
+
+{% for comentario in comentarios %}
+    <div class="comment">
+        <p class="info">
+            Comentario {{ forloop.counter }} by {{ comentario.nombre }}
+            {{ comentario.creado }}
+        </p>
+        {{ comentario.cuerpo|linebreaks }}
+    </div>
+{% empty %}
+    <p>No hay comentarios aun.</p>
+{% endfor %}
+
+{% if nuevo_comentario %}
+    <h2>Tu comentario ha sido agregado.</h2>
+{% else %}
+    <h2>Agregar nuevo comentario</h2>
+    <form action="." method="post">
+        {{ comentario_formulario.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" value="Agregar comentario"></p>
+    </form>
+{% endif %}
 {% endblock %}
