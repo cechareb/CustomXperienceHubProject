@@ -31,13 +31,14 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'cuenta.apps.CuentaConfig',
+    'panel.apps.PanelConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'panel.apps.PanelConfig',
 ]
 
 MIDDLEWARE = [
@@ -136,3 +137,7 @@ EMAIL_HOST_USER = 'cesar.chahuasrebatta@gmail.com'
 EMAIL_HOST_PASSWORD = 'p4tr0c1n14'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'usuariologout'

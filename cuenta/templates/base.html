@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <link href="{% static 'css/panel.css' %}" rel="stylesheet">
+</head>
+<body>
+  <div id="content">
+    {% block content %}
+    {% endblock %}
+  </div>
+  <div id="sidebar">
+    <h2>CX Panel</h2>
+      <p>Este es el panel informativo</p>
+    {% if request.user.is_authenticated %}
+    <ul class="menu">
+      <li {% if section == "dashboard" %}class="selected"{% endif %}>
+        <a href="{% url "dashboard" %}">Dashboard</a>
+      </li>
+    </ul>
+    {% endif %}
+    <span class="user">
+      {% if request.user.is_authenticated %}
+        Hola {{ request.user.first_name }},
+        <a href="{% url "usuariologout" %}">Desloguear</a>
+      {% else %}
+        <a href="{% url "login" %}">Acceder</a>
+      {% endif %}
+    </span>
+  </div>
+</body>
+</html>
